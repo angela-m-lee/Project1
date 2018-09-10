@@ -130,12 +130,15 @@ $('#submit').on('click', function(event) {
        // This line grabs the input from the textbox
        var topic = $('#topicInput').val().trim();
        $.ajax({
-        url: 'https://newsapi.org/v2/top-headlines?q=' + topic + '&apiKey=2820b40a103f4ac58cda4ba7df6cf3d9',
+        url: 'https://newsapi.org/v2/top-headlines?country=us&q=' + topic + '&apiKey=2820b40a103f4ac58cda4ba7df6cf3d9',
         method: 'GET'
        }).then(function(response){
            console.log(response);
-           for (var j = 0; j < response.length; j++){
-               console.log(response.articles[j].title);
+           for (var j = 0; j < response.articles.length; j++){
+               for (var k = 0; k < 5; k++){
+                   console.log(response.articles[j].title[k]);
+               }
+               console.log(response.articles[j]);
            }
        })
 
