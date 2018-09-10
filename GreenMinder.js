@@ -67,6 +67,15 @@ $(document).ready(function(){
     var pastIndexPrices = [];
     //creates the function that pulls from local storage on page load.
 
+    // ON PAGE LOAD, SET THE CURRENT VALUE ALWAYS
+    $.ajax({
+        url: 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=SPX&interval=1min&apikey=FKRKPA78COC2GQDQ' , 
+        method: 'GET'
+    }).then(function(response){
+        var lastRefresh = response['Meta Data']['3. Last Refreshed'];
+        var currentValue = response['Time Series (1min)'][lastRefresh]['4. close'];
+        $('#currentPrice').text('').append(currentValue);
+    })
     localStoragePull();
 
 
